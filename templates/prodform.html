@@ -1,0 +1,28 @@
+<html>
+    <head>
+    </head>
+    <body>
+        <h1>PRODUCT DETAILS<h1>
+        <form action="/productadd" method="post">
+            {% csrf_token %}
+            <label for="pname">product name:</label>
+            <input type="text" id="pname" name="pname" ><br>
+            <label for="pcost">prize:</label>
+            <input type="text" id="pcost" name="pcost"><br>
+            <label for="pcat">category:</label>
+            <select name="pcat" id="pcat">
+                <option value="Kitchen">kitchen</option>
+                <option value="Home Improvement">Home Improvement</option>
+                <option value="Craft and Decor">Craft and Decor</option>
+                <option value="Toys and Games">Toys and Games</option>
+                <option value="Bathroom Accessories">Bathroom Accessories</option>
+                <option value="Storage">Storage</option>
+              </select><br>
+            <label for="pimage">image url</label>
+            <input type="url" id="pimage" name="pimage"><br><br>
+            <input type="submit" name="sub" value="save and next">
+            <input type="submit" name="sub" value="save and exit">
+          </form> 
+          
+    </body>
+</html>

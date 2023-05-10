@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="en">
+
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>home page</title>
+        <link href="/static/style.css" rel="stylesheet" type="text/css">
+    </head>
+    <body>
+        <section id="header">
+            <a href="#"><img src="/static/logo.jpg" alt="logo" class="logo" width="150px" height="50px"></a>
+            <div>
+                <form action="/search" method="post">
+                    {% csrf_token %}
+                    <input type="text" class="search-bar" placeholder="search" name="searching">
+                    <!--<button type="submit"><img src="/static/search.png" height="100%" width="100%"></button></input>-->
+                </form>
+            </div>
+            <div>
+                {% if not request.user.is_authenticated %}
+                <ul id="navbar">
+                    <li><a class=active href="">Home</a></li>
+                    <li><a  href="contact/">Contact Us</a></li>
+                    <li><a  href="whistlist/">Whistlist</a></li>
+                    <li><a  href="bag/mybag">Bag</a></li>
+                    <li><a  href="members/signup">signup</a></li>
+                </ul>
+                {% else %}
+                <ul id="navbar">
+                    <li><a class=active href="">Home</a></li>
+                    <li><a  href="book/">{{request.user}} Account</a></li>
+                    <li><a  href="contact/">Contact Us</a></li>
+                    <li><a  href="whistlist/">Whistlist</a></li>
+                    <li><a  href="bag/mybag">Bag</a></li>
+                    <li><a  href="members/logout">Logout</a></li>
+                </ul>
+                {% endif %}
+            </div>
+        </section>
+        <section id="sec1">
+            <h1>Sell the waste</h1>
+            <p>Get money and buy products</p>
+            <button>Sell now</button>
+        </section>
+        <section id="shop" class="section-p1">
+            <div class="fe-box">
+                <h1>Pick up where you left off</h1>
+            <button><a href="/itemsall">Shop now</a></button>
+            </div>
+       
+        
+            <div class="fe-box">
+                <img src="/static/shop.webp" alt="shop" width="350px" height="300px">
+            </div>
+        </section>
+        <h1>Featured Products</h1>
+        <section id="feature" class="section-p1">
+            {% for item in items %}
+            <div class="febox">
+                <img src="{{item.image.url}}" alt="{{item.category}}" width="350px" height="300px">
+                <h6><a href="/catsearch/{{item.category}}">{{item.category}}</a></h6>
+            </div>
+            {% endfor %}
+            
+        </section>
+        <script src="/static/script.js"></script>
+    </body>
