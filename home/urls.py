@@ -21,9 +21,9 @@ urlpatterns = [
     path('home', views.home, name='home'),
     path('product', views.product, name='product'),
     path('itemsall', views.itemsall, name='itemsall'),
+    path('cart', views.cart, name='cart'),
     path('search', views.search, name='search'),
     path('productadd', views.productadd, name='productadd'),
-    path('success', views.success, name='success'),
     path('catsearch/<str:cat>', views.catsearch, name='catsearch')
     #path('allproducts', views.allproducts, name='allproducts')
     

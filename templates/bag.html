@@ -1,0 +1,157 @@
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>
+        bag
+    </title>
+    <style>
+        #febox {
+            max-width: 1150px;
+            width: 100%;
+            height: 20vh;
+            padding: 10px 10px;
+            box-shadow: 20px 20px 34px rgba(0, 0, 0, 0.03);
+            border: 1px solid #cce7d0;
+            display: flex;
+            margin-right: 15px;
+            border-radius: 4px;
+            margin-bottom: 10px;
+        }
+
+        #febox .details {
+            color: brown;
+            margin-left: 10px;
+        }
+
+        #features {
+            display: flex;
+
+            flex-wrap: wrap;
+        }
+
+        #features .box {
+            max-width: 200px;
+            width: 100%;
+            height: 30vh;
+
+
+            padding: 10px 10px;
+            box-shadow: 20px 20px 34px rgba(0, 0, 0, 0.03);
+            border: 1px solid #cce7d0;
+
+            margin-right: 15px;
+            border-radius: 4px;
+        }
+
+        #features .boxfrm {
+            max-width: 1200px;
+            width: 100%;
+            position: absolute;
+            top: 60px;
+            left: 250px;
+            bottom: 0px;
+
+            text-align: center;
+            padding: 10px 10px;
+            box-shadow: 20px 20px 34px rgba(0, 0, 0, 0.03);
+
+            border-radius: 4px;
+        }
+
+        #top {
+            display: flex;
+            justify-content: space-between;
+            margin-left: 20px;
+            margin-right: 20px;
+        }
+
+        button {
+            background-color: rgb(143, 78, 78);
+            border: none;
+            color: white;
+            padding: 15px 32px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            margin: 4px 2px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="top">
+        <h1>My Bag</h1>
+        <a href="#">+ Add from cart</a>
+
+    </div>
+    <div class="product"></div>
+
+    </div>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+    <script>
+        $(document).ready(function () {
+
+            if (localStorage.getItem('whistlist') == null) {
+                var whistlist = {};
+
+            } else {
+                whistlist = JSON.parse(localStorage.getItem('whistlist'));
+                updatewhistlist(whistlist);
+
+            }
+            if (localStorage.getItem('cart') == null) {
+                document.querySelector(".product").innerHTML = '<p>your bag is empty</p>';
+            } else {
+                cart = JSON.parse(localStorage.getItem('cart'));
+                let half = "";
+                for (let items in cart) {
+                    console.log(cart[items][2]);
+                    console.log(cart[items][3]);
+                    half +=
+                        '<div id="febox"><div class="details"><h5 id=' + "name" + items + '>' + cart[items][2] + '</h5><h5 id=' + "prize" + items + '>' + cart[items][3] + '</h5><span class="whis"><button type="button" id="' + items + '"class="whisbutton" name="movetowhis">Move to Whistlist</button></span><span class="delete"><button type="button" id="' + items + '"class="deleteitem" name="delete">Delete</button></span></div></div>';
+                }
+                let half1 =
+                    '<div class="box"><h2>Order details</h2><h3>Bag Total</h3><button type="button">Place Order</button></div>';
+                let complete = '<section id="features"><div class="boxfrm">' + half + '</div>' + half1 + '</section>';
+                document.querySelector(".product").innerHTML = complete;
+            }
+
+            $('.delete').on('click', 'button.deleteitem', function () {
+                var idstr = this.id.toString();
+                deleteitem(idstr);
+            });
+            function deleteitem(index) {
+                delete cart[index];
+                updateCart(cart);
+            }
+            function updateCart(cart) {
+                localStorage.setItem('cart', JSON.stringify(cart));
+            }
+            function updatewhistlist(cart) {
+                localStorage.setItem('whistlist', JSON.stringify(whistlist));
+            }
+            $('.whis').on('click', 'button.whisbutton', function () {
+                var idstrn = this.id.toString();
+
+
+                if (whistlist[idstrn] != undefined) {
+                    deleteitem(idstrn);
+
+                }
+                else {
+                    image = '';
+                    name = document.getElementById('name' + idstrn).innerHTML;
+                    price = document.getElementById('prize' + idstrn).innerHTML;
+                    whistlist[idstrn] = [image, name, price];
+                }
+                localStorage.setItem('whistlist', JSON.stringify(whistlist));
+            });
+        })
+    </script>
+</body>
+
+</html>

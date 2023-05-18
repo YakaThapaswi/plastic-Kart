@@ -41,6 +41,8 @@ def signup_user(request):
         user=User.objects.create_user(username=lname,password=password1,email=email,first_name=fname,last_name=lname)
         user.save()
         print("user created")
+        user = authenticate(request, username=lname, password=password1)
+        login(request,user)
         return redirect('/home')
     return render(request,"register.html")
 def logout_user(request):

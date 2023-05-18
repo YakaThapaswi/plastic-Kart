@@ -1,11 +1,90 @@
 <html>
-    <head>
-        <title>
-            account
-        </title>
-    </head>
-    <frameset cols="10%, 50%">
-        <frame src="myaccount.html" name="first">
-        <frame src="orders.html" name="two">
-    </frameset>
+
+<head>
+    <title>
+        account
+    </title>
+    <style>
+        #decor {
+            align-items: start;
+        }
+
+        #decor li {
+            list-style: none;
+
+        }
+
+        #decor li a {
+            text-decoration: none;
+            font-size: 20px;
+            font-weight: 60px;
+            color: black;
+            transition: 0.3s ease;
+        }
+
+        #decor li a:hover {
+            color: gray;
+
+        }
+
+        #features {
+            display: flex;
+
+            flex-wrap: wrap;
+        }
+
+        #features .box {
+            max-width: 200px;
+            width: 100%;
+            height: 70vh;
+
+
+            padding: 10px 10px;
+            box-shadow: 20px 20px 34px rgba(0, 0, 0, 0.03);
+            border: 1px solid #cce7d0;
+
+            margin-right: 15px;
+            border-radius: 4px;
+        }
+
+        #features .boxfrm {
+            max-width: 1200px;
+            width: 100%;
+            position: absolute;
+            top: 5px;
+            left:250px;
+            bottom: 0px;
+
+            text-align: center;
+            padding: 10px 10px;
+            box-shadow: 20px 20px 34px rgba(0, 0, 0, 0.03);
+            border: 1px solid #cce7d0;
+
+            border-radius: 4px;
+        }
+    </style>
+</head>
+
+<body>
+    <section id="features">
+        <div class="box">
+            <div>
+                <h2>My Account</h2>
+            </div>
+            <div>
+                <ul id="decor">
+                    <li><a href="orders" target="two">Orders</a></li><br>
+                    <li><a href="kartwallet" target="two">Kart Wallet</a></li><br>
+                    <li><a href="personalinf" target="two">Personal Information</a></li><br>
+                    <li><a href="addressbook" target="two">Address Book</a></li><br>
+                    <li><a href="payments" target="two">Payments</a></li><br>
+                </ul>
+            </div>
+        </div>
+        <div class="boxfrm">
+            <iframe width="100%" height="100%" frameborder="0" src="orders" name="two"></iframe>
+        </div>
+    </section>
+</body>
+
 </html>

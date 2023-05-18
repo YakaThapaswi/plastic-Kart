@@ -21,7 +21,7 @@
                 {% if not request.user.is_authenticated %}
                 <ul id="navbar">
                     <li><a class=active href="">Home</a></li>
-                    <li><a  href="contact/">Contact Us</a></li>
+                    <li><a  href="contact">Contact Us</a></li>
                     <li><a  href="whistlist/">Whistlist</a></li>
                     <li><a  href="bag/mybag">Bag</a></li>
                     <li><a  href="members/signup">signup</a></li>
@@ -29,8 +29,8 @@
                 {% else %}
                 <ul id="navbar">
                     <li><a class=active href="">Home</a></li>
-                    <li><a  href="book/">{{request.user}} Account</a></li>
-                    <li><a  href="contact/">Contact Us</a></li>
+                    <li><a  href="book/account">{{request.user}} Account</a></li>
+                    <li><a  href="contact">Contact Us</a></li>
                     <li><a  href="whistlist/">Whistlist</a></li>
                     <li><a  href="bag/mybag">Bag</a></li>
                     <li><a  href="members/logout">Logout</a></li>
@@ -41,12 +41,12 @@
         <section id="sec1">
             <h1>Sell the waste</h1>
             <p>Get money and buy products</p>
-            <button>Sell now</button>
+            <button id="butn">Sell now</button>
         </section>
         <section id="shop" class="section-p1">
             <div class="fe-box">
                 <h1>Pick up where you left off</h1>
-            <button><a href="/itemsall">Shop now</a></button>
+            <button id="butn"><a href="/itemsall">Shop now</a></button>
             </div>
        
         

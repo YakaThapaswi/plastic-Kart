@@ -1,10 +1,23 @@
+<!DOCTYPE html>
 <html>
-    <head>
-        <title>
-           payments
-        </title>
-    </head>
-    <body>
-        <h1>payments</h1>
-    </body>
+<head>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+<script>
+$(document).ready(function(){
+  $("#whisbutton").click(function(){
+    $("#whisbutton").html("Remove from Whistlist");
+  });
+  $("#bagbutton").click(function(){
+    $("#bagbutton").html("Go to Bag");
+  });
+});
+</script>
+</head>
+<body>
+
+
+<button type="button" id="bagbutton">Add To Bag</button>
+<button type="button" id="whisbutton">Save to Whistlist</button>
+
+</body>
 </html>

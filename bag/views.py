@@ -1,4 +1,4 @@
 from django.shortcuts import render,HttpResponse
 def bag(request):
-    return HttpResponse("bag")
+    return render(request,"bag.html")
 

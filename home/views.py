@@ -5,8 +5,6 @@ def home(request):
     prod=Variant.objects.all()
     context={"items":prod}
     return render(request,"home.html",context)
-def success(request):
-    return render(request,"success.html")
 def productadd(request):
     name=''
     category=''
@@ -28,7 +26,7 @@ def productadd(request):
     if subt=="save and next":
         return redirect(product)
     else:
-        return render(request,"success.html")
+        return HttpResponse("products added successfully")
 def product(request):
     return render(request,'prodform.html')
 def itemsall(request):
@@ -50,4 +48,5 @@ def catsearch(request, cat):
     print(data)
     prod={"items":data}
     return render(request,'search.html',prod)
-
+def cart(request):
+    return render(request,"bag.html")
