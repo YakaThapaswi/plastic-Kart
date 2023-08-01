@@ -1,108 +1,40 @@
-<!doctype html>
-<html lang="en">
+{% extends 'base.html' %}
+{% load static %}
+{% block title%}
+whistlist
 
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>whistlist</title>
-  <link href="/static/itemsall.css" rel="stylesheet" type="text/css">
+{% endblock %}
 
-</head>
+{% block body%}
 
-<body>
+
   <div id="top">
     <h1>My Whistlist</h1>
 
   </div>
-  <div class="product"></div>
+  <section id="feature">
+    {% for item in items%}
+    <div class="febox">
 
-  </div>
+      <div id="inside">
+        <img src="{{item.image}}" height="150" width="150">
+        <div>
+          <h5 id='name'> {{item.name}}</h5>
+          <h5 id='prize'> {{item.prize}}</h5>
+        </div>
+        <a href='{{item.id}}'>
+          <button type="button" id="bag" class="bagbutton" name="addtobag">
+            Add To Bag
+          </button>
+        </a>
+        <a href='/bag/removewhisitem/{{item.id}}'>
+          <button type="button" id="delete" class="deleteitem" name="delete">Delete</button>
+        </a>
+      </div>
+    </div>
+    {% endfor %}
+
+  </section>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
-  <script>
-    $(document).ready(function () {
 
-
-      if (localStorage.getItem('whistlist') == null) {
-        document.querySelector(".product").innerHTML = '<p>your Whistlist is empty</p>';
-      } else {
-        whistlist = JSON.parse(localStorage.getItem('whistlist'));
-
-        let half = "";
-        for (let items in whistlist) {
-
-          half +=
-            '<div class="febox"><div><h5 id=' + "name" + items + '>' + whistlist[items][1] + '</h5><h5 id=' + "prize" + items + '>' + whistlist[items][2] + '</h5><span class="bag"><button type="button" id="' + items + '"class="bagbutton" name="addtobag"><span id=' + "cart" + items + '>Add To Bag</span></button></span><span class="delete"><button type="button" id="' + items + '"class="deleteitem" name="delete">Delete</button></span></div></div>';
-        }
-
-        let complete = '<section id="feature">' + half + '</section>';
-        document.querySelector(".product").innerHTML = complete;
-      }
-      if (localStorage.getItem('cart') == null) {
-        var cart = {};
-
-      } else {
-        cart = JSON.parse(localStorage.getItem('cart'));
-        updateCart(cart);
-
-      }
-      $('.bag').on('click', 'button.bagbutton', function () {
-        var idstr = this.id.toString();
-
-
-        if (cart[idstr] != undefined) {
-          qty = cart[idstr][0] + 1;
-          location.href="cart";
-        }
-        else {
-          qty = 1;
-
-
-          document.getElementById('cart' + idstr).innerHTML = "Go To Bag";
-          //image = document.getElementById('img' + idstr).innerHTML;
-          name = document.getElementById('name' + idstr).innerHTML;
-          price = document.getElementById('prize' + idstr).innerHTML;
-          cart[idstr] = [qty, name, price];
-
-
-
-        }
-        updateCart(cart);
-
-        localStorage.setItem('cart', JSON.stringify(cart));
-
-
-      });
-
-      $('.delete').on('click', 'button.deleteitem', function () {
-        var idstr = this.id.toString();
-        console.log(idstr);
-        console.log(whistlist);
-        delete whistlist[idstr];
-        console.log(whistlist);
-        updatewhistlist(whistlist);
-      });
-
-      function updatewhistlist(whistlist) {
-
-
-        localStorage.setItem('whistlist', JSON.stringify(whistlist));
-
-
-      }
-
-      function updateCart(cart) {
-
-        var sum = 0;
-        for (var item in cart) {
-          sum = sum + cart[item][0];
-        }
-        localStorage.setItem('cart', JSON.stringify(cart));
-
-
-      }
-    })
-  </script>
-
-</body>
-
-</html>
+{% endblock %}

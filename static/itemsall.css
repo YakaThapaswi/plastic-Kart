@@ -43,9 +43,14 @@ button{
     box-shadow: 20px 20px 34px rgba(0,0,0,0.03);
     border: 1px solid #cce7d0;
     border-radius: 4px;
-    margin: 15px 0;
+    margin: 5px 0;
 }
 #feature .febox:hover{
     box-shadow: 10px 20px 54px rgba(70,62,221,0.1);
+}
+#inside {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between
 }
 

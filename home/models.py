@@ -1,6 +1,6 @@
 from django.db import models
 class Product(models.Model):
-    id=models.AutoField
+    #id=models.AutoField()
     name=models.CharField(max_length=30)
     prize=models.IntegerField()
     category=models.CharField(max_length=30)

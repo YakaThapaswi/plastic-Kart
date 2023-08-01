@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title%}
+sell
+
+{% endblock %}
+
+
+{% block body%}
+    <div>
+        <h1>Don't make a waste that nature can't digest</h1>
+        <p>Be a part of recycling the waste</p>
+
+        <div>
+            <h2>{{detail.name}}</h2>
+            <p>{{detail.mobile}}</p>
+            <p>{{detail.flat}}</p>
+            <p>{{detail.area}}</p>
+            <p>{{detail.district}}</p>
+            <p>{{detail.state}}</p>
+            <p>{{detail.code}}</p>
+        </div>
+        <a href="../book/addressbook/sell">add/change address</a>
+        <form action="/book/sellwaste" method="post">
+            {%csrf_token%}
+        <button type="submit" name="button">sell</button>
+    </form>
+    </div>
+</body>
+
+{% endblock%}

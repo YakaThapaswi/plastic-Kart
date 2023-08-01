@@ -1,9 +1,10 @@
-<html>
+{% extends 'base.html' %}
+{% load static %}
+{% block title%}
+account
 
-<head>
-    <title>
-        account
-    </title>
+{% endblock %}
+{% block css %}
     <style>
         #decor {
             align-items: start;
@@ -36,7 +37,7 @@
         #features .box {
             max-width: 200px;
             width: 100%;
-            height: 70vh;
+            height: 40vh;
 
 
             padding: 10px 10px;
@@ -63,9 +64,10 @@
             border-radius: 4px;
         }
     </style>
-</head>
+    {% endblock %}
 
-<body>
+
+{% block body %}
     <section id="features">
         <div class="box">
             <div>
@@ -75,9 +77,7 @@
                 <ul id="decor">
                     <li><a href="orders" target="two">Orders</a></li><br>
                     <li><a href="kartwallet" target="two">Kart Wallet</a></li><br>
-                    <li><a href="personalinf" target="two">Personal Information</a></li><br>
-                    <li><a href="addressbook" target="two">Address Book</a></li><br>
-                    <li><a href="payments" target="two">Payments</a></li><br>
+                    <li><a href="addbook" target="two">Address Book</a></li><br>
                 </ul>
             </div>
         </div>
@@ -85,6 +85,4 @@
             <iframe width="100%" height="100%" frameborder="0" src="orders" name="two"></iframe>
         </div>
     </section>
-</body>
-
-</html>
+{% endblock %}

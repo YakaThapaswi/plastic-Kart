@@ -1,0 +1,49 @@
+<html>
+
+<head>
+    <title>
+        kart wallet
+    </title>
+    <style>
+        #box {
+            max-width: 500px;
+            width: 100%;
+            height: 50vh;
+            text-align: center;
+            padding: 10px 10px;
+            box-shadow: 20px 20px 34px rgba(0, 0, 0, 0.03);
+            border: 1px solid #cce7d0;
+            display: flex;
+            
+            justify-content: center;
+            border-radius: 4px;
+            margin: 15px 0;
+            position: absolute;
+            right: 0;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            margin: auto;
+        }
+        #box.first{
+            width:100%;
+            height:10vh;
+            border: 10px solid gray;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>User service</h1>
+    <section id="box">
+        <form action="../userservice/{{id}}" method="post">
+            {% csrf_token %}
+            user:<input type="text" id="user" name="user" value="{{user}}" readonly><br><br>
+            amount:<input type="text" name="amount" id="checked"><br><br>
+            <input type="checkbox" id="checked" name="checked" required><br><br>
+            <button type="submit">submit</button>
+        </form>
+    </section>
+</body>
+
+</html>

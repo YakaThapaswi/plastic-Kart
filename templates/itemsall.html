@@ -1,124 +1,41 @@
-<!doctype html>
-<html lang="en">
+{% extends 'base.html' %}
+{% load static %}
+{% block title%}
+bag
 
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>products</title>
+{% endblock %}
+
+{% block css%}
   <link href="/static/itemsall.css" rel="stylesheet" type="text/css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
   <script>
     $(document).ready(function () {
 
-      if (localStorage.getItem('cart') == null) {
-        var cart = {};
-
-      } else {
-        cart = JSON.parse(localStorage.getItem('cart'));
-
-        //delete cart[2];
-
-        //console.log(cart[2])
-        updateCart(cart);
-
-      }
+      
       // add or increment code
 
       // $('.cart').click(function() {
       $('.bag').on('click', 'button.bagbutton', function () {
         var idstr = this.id.toString();
 
+          if(document.getElementById('cart' + idstr).innerHTML =="Go To Bag")
+          {
+            location.href="cart"
+          }
 
-
-        if (cart[idstr] != undefined) {
-          qty = cart[idstr][0] + 1;
-          location.href="cart";
-        }
-        else {
-          qty = 1;
-
-          document.getElementById('cart' + idstr).innerHTML = "Go To Bag";
-          image = document.getElementById('img' + idstr).innerHTML;
-          name = document.getElementById('name' + idstr).innerHTML;
-          price = document.getElementById('prize' + idstr).innerHTML;
-          cart[idstr] = [qty, image, name, price];
+        
+          else{
+          document.getElementById('cart' + idstr).innerHTML = "Go To Bag";}
+          
 
 
 
-        }
-        updateCart(cart);
-
-        localStorage.setItem('cart', JSON.stringify(cart));
-
-
-      });
-
-      function updateCart(cart) {
-
-        var sum = 0;
-        for (var item in cart) {
-
-          sum = sum + cart[item][0];
-        }
-        localStorage.setItem('cart', JSON.stringify(cart));
-
-
-      }
-
-      //whistlist
-      if (localStorage.getItem('whistlist') == null) {
-        var whistlist = {};
-
-      } else {
-        whistlist = JSON.parse(localStorage.getItem('whistlist'));
-        updatewhistlist(whistlist);
-
-      }
-      // add or increment code
-
-      // $('.cart').click(function() {
-      $('.whis').on('click', 'button.whisbutton', function () {
-        var idstrn = this.id.toString();
-
-
-        if (whistlist[idstrn] != undefined) {
-          //qty = whistlist[idstrn][0] + 1;
-          document.getElementById('fav' + idstrn).innerHTML = "Save to Whistlist";
-        }
-        else {
-
-
-
-          document.getElementById('fav' + idstrn).innerHTML = "Remove from whistlist";
-          image = document.getElementById('img' + idstrn).innerHTML;
-          name = document.getElementById('name' + idstrn).innerHTML;
-          price = document.getElementById('prize' + idstrn).innerHTML;
-          whistlist[idstrn] = [image, name, price];
-
-
-
-        }
-        //updatewhistlist(whistlist);
-
-        localStorage.setItem('whistlist', JSON.stringify(whistlist));
-
-
-      });
-
-      function updatewhistlist(whistlist) {
-
-        //var sum = 0;
-        //for (var item in whistlist) {
-        //sum = sum + cart[item][0];}
-        localStorage.setItem('whistlist', JSON.stringify(whistlist));
-
-
-      }
-
-    });
+        })
+      })
+        
   </script>
-</head>
-
+{% endblock %}
+{% block body%}
 <body>
   <h1>items</h1>
   <section id="feature">
@@ -131,10 +48,10 @@
         <h5 id="prize{{item.id}}">{{item.prize}}</h5>
         <p>{{item.category}}</p>
         <span class="bag">
-          <button type="button" id="{{item.id}}" class="bagbutton" name="addtobag"><span id="cart{{item.id}}">Add To
-              Bag</span></button></span>
+          <a href='bag/addtobag/{{item.id}}'><button type="button" id="{{item.id}}" class="bagbutton" name="addtobag"><span id="cart{{item.id}}">Add To
+              Bag</span></button></span></a>
         <span class="whis">
-          <button type="button" id="{{item.id}}" class="whisbutton" name="savetowhistlist"><span
+          <a href="bag/addtowhis/{{item.id}}"><button type="button" id="{{item.id}}" class="whisbutton" name="savetowhistlist"><span
               id="fav{{item.id}}">Save to
               Whistlist</span></button></span>
       </div>
@@ -143,6 +60,4 @@
   </section>
 
 
-</body>
-
-</html>
+{% endblock%}

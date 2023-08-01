@@ -1,8 +1,27 @@
 from django.db import models
-class Orders(models.Model):
-    orderId=models.IntegerField()
-    status=models.CharField(max_length=30)
+from django.contrib.auth.models import auth,User
+from home.models import Product
+
+class Address(models.Model):
+    user=models.ForeignKey(User,on_delete=models.CASCADE,related_name="address")
+    name=models.CharField(max_length=20)
+    mobile=models.IntegerField()
+    code=models.IntegerField()
+    state=models.CharField(max_length=20)
+    district=models.CharField(max_length=100)
+    area=models.CharField(max_length=20)
+    flat=models.CharField(max_length=5)
+
+class Order(models.Model):
+    user=models.ForeignKey(User,on_delete=models.CASCADE,related_name="order")
+    addressid=models.ForeignKey(Address,on_delete=models.CASCADE,related_name="order")
+    status=models.CharField(default="placing",max_length=20)
     date=models.DateField()
-    image=models.URLField()
-    def __str__(self):
-        return self.orderId
+    itemid=models.ForeignKey(Product,on_delete=models.CASCADE,related_name="order")
+
+class Sell(models.Model):
+    user=models.ForeignKey(User,on_delete=models.CASCADE,related_name="sell")
+    addressid=models.ForeignKey(Address,on_delete=models.CASCADE,related_name="sell")
+    status=models.CharField(default="placing",max_length=20)
+    date=models.DateField()
+

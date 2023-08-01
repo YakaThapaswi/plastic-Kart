@@ -1,8 +1,11 @@
 from django.shortcuts import render,HttpResponse,redirect
 from django.template import loader
 from home.models import Product,Variant
+from members.models import Wallet
 def home(request):
     prod=Variant.objects.all()
+    #wallet,_=Wallet.objects.get_or_create(user=request.user)
+    #print(wallet.user,wallet.amount)
     context={"items":prod}
     return render(request,"home.html",context)
 def productadd(request):

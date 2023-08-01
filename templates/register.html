@@ -1,8 +1,12 @@
-{% load socialaccount %}
-<html>
-    <head>
-    </head>
-    <body>
+{% extends 'base.html' %}
+{% load static %}
+{% block title%}
+signin
+
+{% endblock %}
+
+
+{% block body %}
         <h1>signup<h1>
             {% for message in messages %}
             <p color:red>{{message}}</p>
@@ -23,5 +27,4 @@
             <p>already user<a href="login">login</a></p>
           </form> 
           
-    </body>
-</html>
+{% endblock %}

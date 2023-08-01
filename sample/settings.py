@@ -35,7 +35,7 @@ INSTALLED_APPS = [
     'book',
     'bag',
     'contact',
-    'whistlist',
+    
     'members',
     'django.contrib.admin',
     'django.contrib.auth',

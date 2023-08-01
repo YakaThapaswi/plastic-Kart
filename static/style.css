@@ -111,6 +111,7 @@ body{
     height:40px;
     cursor: pointer;
     padding: 2%;
+    text-decoration: none;
 }
 
 #navbar{
@@ -155,6 +156,14 @@ body{
     text-decoration: none;
 }
 #sec1 button{
+    background-color:transparent;
+    color: rgb(139, 52, 52);
+    border:0;
+    cursor:pointer;
+    font-weight: 700;
+    font-size: medium;
+}
+#shop button{
     background-color:transparent;
     color: rgb(139, 52, 52);
     border:0;

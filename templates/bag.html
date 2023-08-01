@@ -1,11 +1,11 @@
-<html>
+{% extends 'base.html' %}
+{% load static %}
+{% block title%}
+bag
 
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>
-        bag
-    </title>
+{% endblock %}
+
+{% block css %}
     <style>
         #febox {
             max-width: 1150px;
@@ -34,13 +34,13 @@
         #features .box {
             max-width: 200px;
             width: 100%;
-            height: 30vh;
+            height: 80vh;
 
 
             padding: 10px 10px;
             box-shadow: 20px 20px 34px rgba(0, 0, 0, 0.03);
             border: 1px solid #cce7d0;
-
+            
             margin-right: 15px;
             border-radius: 4px;
         }
@@ -79,79 +79,67 @@
             margin: 4px 2px;
             cursor: pointer;
         }
-    </style>
-</head>
 
-<body>
+        #inside {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between
+        }
+    </style>
+{% endblock %}
+
+{% block body%}
+
     <div id="top">
         <h1>My Bag</h1>
-        <a href="#">+ Add from cart</a>
+        <a href="whistlist/">+ Add from whistlist</a>
 
     </div>
-    <div class="product"></div>
+
 
     </div>
+    <section id="features">
+        <div class="boxfrm">
+            {% for item in items %}
+            <div id="febox">
+                <div class="details">
+                    <div id="inside">
+                        <img src="{{item.image}}" height="150" width="150">
+                        <div>
+                            <h5 id='name'> {{item.name}}</h5>
+                            <h5 id='prize'> {{item.prize}}</h5>
+                        </div>
+                        <a href="/bag/cartwhis/{{item.id}}"><button type="button" id="whis" class="whisbutton"
+                                name="movetowhis">Move to Whistlist</button></a>
+                        <a href="removecartitem/{{item.id}}"><button type="button" id="delete" class="deleteitem"
+                                name="delete">Delete</button></a>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+        <div class="box">
+            <h2>Order details</h2>
+            <h3>Bag Total: {{tprize}}</h3><br>
+            <h4>Address:</h4>
+            <div>
+            <h2>{{detail.name}}</h2>
+            <p>{{detail.mobile}}</p>
+            <p>{{detail.flat}}</p>
+            <p>{{detail.area}}</p>
+            <p>{{detail.district}}</p>
+            <p>{{detail.state}}</p>
+            <p>{{detail.code}}</p>
+            </div>
+            <a href="/book/addressbook/buy">add/change address</a>
+            <form method="post" action="/bag/mybag">
+                {% csrf_token %}
+            <button type="submit" name="place" value="{{tprize}}">Place Order</button>
+        </form>
+        </div>
+    </section>
+
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
-    <script>
-        $(document).ready(function () {
+    
 
-            if (localStorage.getItem('whistlist') == null) {
-                var whistlist = {};
-
-            } else {
-                whistlist = JSON.parse(localStorage.getItem('whistlist'));
-                updatewhistlist(whistlist);
-
-            }
-            if (localStorage.getItem('cart') == null) {
-                document.querySelector(".product").innerHTML = '<p>your bag is empty</p>';
-            } else {
-                cart = JSON.parse(localStorage.getItem('cart'));
-                let half = "";
-                for (let items in cart) {
-                    console.log(cart[items][2]);
-                    console.log(cart[items][3]);
-                    half +=
-                        '<div id="febox"><div class="details"><h5 id=' + "name" + items + '>' + cart[items][2] + '</h5><h5 id=' + "prize" + items + '>' + cart[items][3] + '</h5><span class="whis"><button type="button" id="' + items + '"class="whisbutton" name="movetowhis">Move to Whistlist</button></span><span class="delete"><button type="button" id="' + items + '"class="deleteitem" name="delete">Delete</button></span></div></div>';
-                }
-                let half1 =
-                    '<div class="box"><h2>Order details</h2><h3>Bag Total</h3><button type="button">Place Order</button></div>';
-                let complete = '<section id="features"><div class="boxfrm">' + half + '</div>' + half1 + '</section>';
-                document.querySelector(".product").innerHTML = complete;
-            }
-
-            $('.delete').on('click', 'button.deleteitem', function () {
-                var idstr = this.id.toString();
-                deleteitem(idstr);
-            });
-            function deleteitem(index) {
-                delete cart[index];
-                updateCart(cart);
-            }
-            function updateCart(cart) {
-                localStorage.setItem('cart', JSON.stringify(cart));
-            }
-            function updatewhistlist(cart) {
-                localStorage.setItem('whistlist', JSON.stringify(whistlist));
-            }
-            $('.whis').on('click', 'button.whisbutton', function () {
-                var idstrn = this.id.toString();
-
-
-                if (whistlist[idstrn] != undefined) {
-                    deleteitem(idstrn);
-
-                }
-                else {
-                    image = '';
-                    name = document.getElementById('name' + idstrn).innerHTML;
-                    price = document.getElementById('prize' + idstrn).innerHTML;
-                    whistlist[idstrn] = [image, name, price];
-                }
-                localStorage.setItem('whistlist', JSON.stringify(whistlist));
-            });
-        })
-    </script>
-</body>
-
-</html>
+{% endblock %}
